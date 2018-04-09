@@ -22,6 +22,9 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.FindPwdActivity" />
         <activity android:name=".activity.ModifyPwdActivity" />
+        <!--<activity android:name=".activity.ChangeUserInfo" />-->
+        <activity android:name=".activity.ChangeUserInfoActivity" />
+        <activity android:name=".activity.UserInfoActivity"></activity>
     </application>
 
 </manifest>

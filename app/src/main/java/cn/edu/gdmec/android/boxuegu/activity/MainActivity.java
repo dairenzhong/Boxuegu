@@ -4,12 +4,9 @@ package cn.edu.gdmec.android.boxuegu.activity;
  * Created by Administrator on 2018/3/27 0027.
  */
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -24,7 +21,7 @@ import android.widget.Toast;
 import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.fragment.CourseFragment;
 import cn.edu.gdmec.android.boxuegu.fragment.ExercisesFragment;
-import cn.edu.gdmec.android.boxuegu.fragment.MyInfoFragment;
+import cn.edu.gdmec.android.boxuegu.fragment.MyinfoFragment;
 import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -58,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 clearBottomImageState();
                 setSelectedStatus(0);
             } else {
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_body, new MyInfoFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_body, new MyinfoFragment()).commit();
                 clearBottomImageState();
                 setSelectedStatus(2);
             }
@@ -164,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bottom_bar_myinfo_btn:
                 clearBottomImageState();
                 setSelectedStatus(2);
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_body, new MyInfoFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_body, new MyinfoFragment()).commit();
                 break;
         }
     }
