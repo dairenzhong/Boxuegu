@@ -31,6 +31,20 @@ public class LoginActivity extends AppCompatActivity {
     private String psw;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            //从注册页面传递过来的用户名
+            String userName = data.getStringExtra("userName");
+            if (!TextUtils.isEmpty(userName)) {
+                et_user_name.setText(userName);
+                //设置光标的位置
+                et_user_name.setSelection(userName.length());
+            }
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -61,18 +75,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
+                //由于注册成功的用户名会返回，但之前输入的密码仍然留着，这里清空（非必要）
+                et_user_name.getText().clear();
+                et_pwd.getText().clear();
             }
         });
         //找回密码控件的事件
-//        tv_find_psw.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //跳转到找回密码界面
-//                Intent intent = new Intent(LoginActivity.this, FindPswActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        tv_find_psw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //跳转到找回密码界面
+                Intent intent = new Intent(LoginActivity.this, FindPwdActivity.class);
+                startActivity(intent);
+            }
+        });
         //登录按钮的点击事件
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,11 +108,11 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                     //保存登录状态和登录的用户名
                     saveLoginStatus(true, userName);
+                    //把登录成功的状态返回到MainActivity
                     Intent data = new Intent();
                     data.putExtra("isLogin", true);
-                    data.putExtra("userName", userName);
                     setResult(RESULT_OK, data);
-                    finish();
+                    LoginActivity.this.finish();
                     return;
                 } else if (!TextUtils.isEmpty(spPsw) && !md5Psw.equals(spPsw)) {
                     Toast.makeText(LoginActivity.this, "输入的用户名和密码不一致", Toast.LENGTH_SHORT).show();
@@ -119,19 +136,5 @@ public class LoginActivity extends AppCompatActivity {
     private String readPsw(String userName) {
         SharedPreferences sp = getSharedPreferences("loginInfo", MODE_PRIVATE);
         return sp.getString(userName, "");
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data!=null){
-            //从注册页面传递过来的用户名
-            String userName = data.getStringExtra("userName");
-            if (!TextUtils.isEmpty(userName)) {
-                et_user_name.setText(userName);
-                //设置光标的位置
-                et_user_name.setSelection(userName.length());
-            }
-        }
     }
 }

@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         tv_main_title = (TextView) findViewById(R.id.tv_main_title);
         tv_main_title.setText("注册");
         tv_back = (TextView) findViewById(R.id.tv_back);
-        rl_title_bar = (RelativeLayout) findViewById(R.id.title_bar);
+        rl_title_bar = (RelativeLayout) findViewById(R.id.rl_title_bar);
         rl_title_bar.setBackgroundColor(Color.TRANSPARENT);
 
         //从activity_register.xml页面布局中获取对应的UI控件

@@ -19,6 +19,9 @@
         <activity android:name=".activity.SplashActivity"/>
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.FindPwdActivity" />
+        <activity android:name=".activity.ModifyPwdActivity" />
     </application>
 
 </manifest>
