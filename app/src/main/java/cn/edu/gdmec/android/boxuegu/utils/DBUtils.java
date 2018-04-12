@@ -3,7 +3,6 @@ package cn.edu.gdmec.android.boxuegu.utils;
 /**
  * Created by ASUS on 2018/4/9.
  */
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -45,6 +44,7 @@ public class DBUtils {
         cv.put("nickName", bean.nickName);
         cv.put("sex", bean.sex);
         cv.put("signature", bean.signature);
+        cv.put("qq", bean.qq);
         //Convenience method for inserting a row into the database.
         //注意，我们是从数据库使用插入方法，传入表名和数据集完成插入
         db.insert(SQLiteHelper.U_USER_INFO, null, cv);
@@ -67,6 +67,7 @@ public class DBUtils {
             bean.nickName = cursor.getString(cursor.getColumnIndex("nickName"));
             bean.sex = cursor.getString(cursor.getColumnIndex("sex"));
             bean.signature = cursor.getString(cursor.getColumnIndex("signature"));
+            bean.qq = cursor.getString(cursor.getColumnIndex("qq"));
         }
         cursor.close();
         return bean;

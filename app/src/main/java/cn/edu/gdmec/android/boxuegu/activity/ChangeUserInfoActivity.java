@@ -1,9 +1,7 @@
 package cn.edu.gdmec.android.boxuegu.activity;
-
 /**
  * Created by ASUS on 2018/4/9.
  */
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -19,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import cn.edu.gdmec.android.boxuegu.R;
 
 public class ChangeUserInfoActivity extends AppCompatActivity {
@@ -134,6 +131,20 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
                             Selection.setSelection(editable, selEndIndex);
                         }
                         break;
+                    case 3: //签名，做多16，
+                        if (len > 12) {
+                            int selEndIndex = Selection.getSelectionEnd(editable);
+                            String str = editable.toString();
+                            String newStr = str.substring(0, 12);
+                            et_content.setText(newStr);
+                            editable = et_content.getText();
+                            int newLen = editable.length();
+                            if (selEndIndex > newLen) {
+                                selEndIndex = editable.length();
+                            }
+                            Selection.setSelection(editable, selEndIndex);
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -168,6 +179,20 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
                     ChangeUserInfoActivity.this.finish();
                 } else {
                     Toast.makeText(this, "签名不能为空", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case 3:
+                if (!TextUtils.isEmpty(etContent)) {
+                    if (!TextUtils.isDigitsOnly(etContent)){
+                        Toast.makeText(this, "请输入12位数字", Toast.LENGTH_SHORT).show();
+                    }else{
+                        data.putExtra("qq", etContent);
+                        setResult(RESULT_OK, data);
+                        Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+                        ChangeUserInfoActivity.this.finish();
+                    }
+                } else {
+                    Toast.makeText(this, "QQ不能为空", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
